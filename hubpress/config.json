@@ -1,10 +1,1 @@
-{
-  "meta": {
-    "username": "flavienliger",
-    "repositoryName": "flavienliger.github.io",
-    "branch": "master"
-  },
-  "theme": {
-    "name": "Casper"
-  }
-}
+{"meta":{"username":"flavienliger","repositoryName":"flavienliger.github.io","branch":"master"},"site":{"title":"Développement - tips et galère","description":"Des articles réguliers sur les problèmes rencontrés, ou sur des sujets divers d'informatique / développement.","logo":"","postsPerPage":"10","disqus":"lieo","url":"https://flavienliger.github.io"},"socialnetwork":{},"theme":{"name":"Casper","url":"//flavienliger.github.io/themes/Casper"}}
