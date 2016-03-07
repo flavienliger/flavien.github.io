@@ -1,0 +1,14 @@
+= Comparer des dossiers (NodeJS)
+
+J'ai eu il y a pas longtemps à devoir faire un module de comparaison de dossier.
+Il existe plusieurs méthodes, allant de la plus bourrine, qui va récursivement parcourir un dossier comparer les fichiers, puis parcourir le second dossier, et voir ce qui manque.
+A celle qui nous intéresse, qui va ouvrir chaque dossier, comparer les fichiers et sous dossier.
+
+La partie découverte des dossiers / fichiers sera fait grâce au module https://www.npmjs.com/package/walk[npm walk] qui permet via un gestionnaire d'événement d'avancer pas à pas dans les fichiers/ dossiers. Evidement rien ne vous empêche de le refaire (et ça sera peu être le sujet d'un projet article).
+
+Le fonctionnement sera de comparer des fichiers entres eux, s'il en manque un le nom le plus faible correspond au manquant, on attend le suivant et ainsi de suite. Exemple :
+
+A - A ; pass
+B - C ; B<C, B manquant
+C - C ; pass
+
