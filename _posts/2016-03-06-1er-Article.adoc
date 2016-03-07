@@ -1,12 +1,11 @@
-= Test d'article =
+= 1er Article =
+:hp-tags: création, HubPress
 
-'abc'
-`abc`
+Comme pour tout nouveau projet, il faut inaugurer par quelques mots.
+Ce blog à pour but de m'entrainer à décrire et expliquer tout un tas de chose que je croise, tout en me forcant à apprendre.
+Je vais tenter de suivre le même objectif que [Xavier Nayrac](https://lkdjiin.github.io/blog/2014/08/24/retour-sur-un-an-darticle-quotidien/) qui est d'écrire un article tous les jours pendant un an, je ne sais pas du tout si j'arriverais à suivre la cadence. Mais si je n'essaye pas, comment je pourais savoir si j'en suis capable.
 
+Du coup c'est avec plaisir que je vais vour parler de mes sujets de développement, et des réponses que je trouve par ci par là.
+Cela poura peu être aider quelqu'un, on sait jamais ah ah.
 
-- 1
-- 2
-
-```javascript
-var test = new abc();
-```
+Ps: ce blog fonctionne grâce au projet HubPress permettant de s'héberger directement sur GitHub, que j'ai décidé de tester par la même ocassion.
