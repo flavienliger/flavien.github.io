@@ -1,0 +1,69 @@
+= Jeux de piste DYMO =
+
+Ah Dymo, qui propose un WebService que pour Windows et qui n'accepte que des url en localhost (oui oui, faire une api sur un serveur mais interdire de l'appeler de dehors).
+Bon, j'ai besoin sur les machines du réseau d'appeler une page localhost:port qui va imprimer des étiquettes sur la Dymo.
+
+Solution, modifier l'origin en JS ? rien de bien concluant existe. Utiliser une iframe ? oui mais comment envoyer les données.
+Faire un serveur Php qui redirige le trafic vers le localhost ? on tiens une solution.
+
+Php nous propose plusieurs solutions pour récupérer le contenu d'une page, comme file_get_contents.
+Je l'ai d'abord utilisé, sauf qu'il n'envoyait pas correctement les données POST, soit j'ai mal vu la doc, soit le https foutait la merde.
+
+Je suis partis sur curl, qui est bien complet, et permet de faire tout ce que l'on souhaite.
+- envoyer un header spécial
+- envoyer les données POST
+- récupérer et afficher la réponse
+
+Ce qui nous donne :
+```php
+
+// on autorise l'accès peu importe l'origin
+header('Access-Control-Allow-Origin: *');
+
+// on récupère la requête de notre page, ex: /DYMO/DLS/Printing/StatusConnected
+$url = $_SERVER['REQUEST_URI'];
+
+// on initialise et gère curl
+$ch = curl_init();
+
+// l'url complète avec le port
+curl_setopt($ch, CURLOPT_URL, 'https://localhost:41951'.$url);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+// si on envoie un POST (formulaire d'impression)
+if(!empty($_POST)){
+  $fields_string = '';
+  
+  // on concatène la chaîne et on la parse
+  foreach($_POST as $key=>$value) { 
+    $fields_string .= $key.'='.urlencode($value).'&'; 
+  }
+  
+  // on supprime l'espace blanc, et le dernier &
+  rtrim($fields_string, '&');
+  $fields_string = substr($fields_string, 0, -1);
+
+  // petit fix spécial, en PHP ' ' == '+', en JS ' ' == '%20'
+  $fields_string = str_replace('+', '%20', $fields_string);
+  
+  curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+}
+
+// on ignore le SSL du serveur
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+// on envoie le tout
+$result = curl_exec($ch);
+curl_close($ch);
+
+// et voilà le résultat
+echo $result;
+
+```
+
+Le fonctionnement est simple, on récupère l'url appelé /DYMO/..., on créer un curl, si on a des données, on les encodes, on envoie le tout, et on affiche le résultat.
+
+
+Merci Dymo de me faciliter la vie ;).
