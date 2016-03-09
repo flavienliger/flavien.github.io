@@ -1,4 +1,5 @@
 = Jeux de piste DYMO =
+:hp-tags: dymo, webservice, astuce
 
 Ah Dymo, qui propose un WebService que pour Windows et qui n'accepte que des url en localhost (oui oui, faire une api sur un serveur mais interdire de l'appeler de dehors).
 Bon, j'ai besoin sur les machines du réseau d'appeler une page localhost:port qui va imprimer des étiquettes sur la Dymo.
@@ -67,3 +68,5 @@ Le fonctionnement est simple, on récupère l'url appelé /DYMO/..., on créer u
 
 
 Merci Dymo de me faciliter la vie ;).
+
+Edit: le https://github.com/flavienliger/DymoWebservice[github] pour installer pas à pas ce serveur.
