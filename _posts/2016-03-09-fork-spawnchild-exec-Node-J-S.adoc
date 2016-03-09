@@ -3,10 +3,30 @@
 Quelle est la différence entre les trois ?
 
 ## fork
-Génère un processus NodeJs, avec les mêmes variables d'environnement que celui en cours. Cela permet notamment de faire du multi-thread et parallelisé une application.
+Génère un processus NodeJs, avec les mêmes variables d'environnement que celui en cours. Cela permet notamment de faire du multi-thread et parallelisé une application. Un exemple concret de son utilisation arrivera dans un prochain article.
 
 ```javascript
+var ps = require('child_process');
 
+var thread = ps.fork(url);
+
+// lorsqu'on reçoit un message du thread
+thread.on('message', function(msg){
+
+});
+
+// lors d'une erreur dans le thread
+thread.on('error', function(err){
+
+});
+
+// est appelé lors d'une fermeture (crash/ close)
+thread.on('close', function(e, signal){
+	
+});
+
+// envoie des données vers le thread (String seulement)
+thread.send(JSON.stringify(data));
 
 ```
 
@@ -15,6 +35,32 @@ Génère un processus NodeJs, avec les mêmes variables d'environnement que celu
 Démarre un processus avec un gestionnaire d'évènement, qui permet d'afficher les logs en cours.
 Il a la particul
 
+```javascript
+var ps = require('child_process').exec;
 
-## Exec
+ps.exec('find . -name "test"', function(err, stdout, stderr){
+
+});
+
+```
+
+## exec
 Lance un processus qui attend la fin de l'exécution avant d'appeler le callback.
+
+```javascript
+var ps = require('child_process');
+
+ps.exec('find . -name "test"', function(err, stdout, stderr){
+  // récupère sous format brut la sortie
+  
+});
+
+```
+
+
+
+Split de donnée brute
+
+Sous windows :
+\r\n sous mac \n
+/(?:\r\n?|\n)/g
