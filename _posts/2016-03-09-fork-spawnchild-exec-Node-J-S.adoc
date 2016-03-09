@@ -1,0 +1,20 @@
+= fork / spawnchild / exec - NodeJS =
+
+Quelle est la différence entre les trois ?
+
+## fork
+Génère un processus NodeJs, avec les mêmes variables d'environnement que celui en cours. Cela permet notamment de faire du multi-thread et parallelisé une application.
+
+```javascript
+
+
+```
+
+
+## spawnchild
+Démarre un processus avec un gestionnaire d'évènement, qui permet d'afficher les logs en cours.
+Il a la particul
+
+
+## Exec
+Lance un processus qui attend la fin de l'exécution avant d'appeler le callback.
